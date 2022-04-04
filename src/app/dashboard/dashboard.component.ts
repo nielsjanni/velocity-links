@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import {
   agencyUrls,
   nelnetbankUrls,
@@ -10,6 +11,7 @@ import {
   onCallUrls,
   supportUrls,
   nelnetUrls,
+  ICollectionUrls,
 } from './links';
 @Component({
   selector: 'app-dashboard',
@@ -29,19 +31,26 @@ export class DashboardComponent implements OnInit {
   support = supportUrls;
   nelnet = nelnetUrls;
 
-  ticketNumber: string = '';
-  jiraBaseUrl = 'https://jira.cl.glhec.org/browse';
-  jiraUrl: string = '';
-  setTicketNumber() {}
-  getValue(event: Event): string {
-    const searchInput = (event.target as HTMLInputElement).value;
-    this.ticketNumber = searchInput;
-    this.jiraUrl = `${this.jiraBaseUrl}/AI-${this.ticketNumber}`;
+  defaultJiraProject = 'AI';
 
-    return searchInput;
+  jiraTicketForm: FormGroup = new FormGroup({
+    jiraProject: new FormControl(`${this.defaultJiraProject}`),
+  });
+
+  jiraBaseUrl = 'https://jira.cl.glhec.org/browse';
+  jiraProject: string = '';
+  ticketNumber: string = '';
+  jiraUrl: string = '';
+
+  buildJiraUrl(event: Event): string {
+    this.ticketNumber = (event.target as HTMLInputElement).value;
+    this.jiraUrl = `${this.jiraBaseUrl}/${this.jiraProject}-${this.ticketNumber}`;
+    return this.ticketNumber;
   }
-  launchTicket() {}
+
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.jiraProject = this.defaultJiraProject;
+  }
 }

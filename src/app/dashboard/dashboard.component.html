@@ -607,16 +607,43 @@
       >
         <span>{{ support.jiraD2tc.text }}</span>
       </a>
-      <div class="container">
-        <input
-          class="search-field"
-          placeholder="ticket#"
-          (input)="ticketNumber = getValue($event)"
-        />
-        <a href="{{ jiraUrl }}" target="_blank" rel="noopener">
-          <button class="search-button">{{ jiraUrl }}</button>
-        </a>
-      </div>
+      <form [formGroup]="jiraTicketForm" class="container jira-form-container">
+        <div class="jira-ticket-container">
+          <input
+            class="jira-ticket-field"
+            placeholder="ticket#"
+            (input)="ticketNumber = buildJiraUrl($event)"
+          />
+          <a
+            href="{{ jiraUrl }}"
+            target="_blank"
+            rel="noopener"
+            class="container"
+          >
+            <button class="jira-ticket-button"><p>Open Ticket</p></button>
+          </a>
+        </div>
+        <div class="jira-form-container">
+          <label>
+            <input
+              type="radio"
+              formControlName="jiraProject"
+              value="AI"
+              (click)="jiraProject = 'AI'"
+            />
+            Agency
+          </label>
+          <label>
+            <input
+              type="radio"
+              formControlName="jiraProject"
+              value="NNBANK"
+              (click)="jiraProject = 'NNBANK'"
+            />
+            NNB
+          </label>
+        </div>
+      </form>
     </div>
   </div>
 

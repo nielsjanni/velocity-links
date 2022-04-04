@@ -28,6 +28,11 @@ export interface IImplementationUrls {
     auth?: IUrl;
   };
 }
+
+export interface ICollectionUrls {
+  [key: string]: IUrl;
+}
+
 export const agencyUrls: IImplementationUrls = {
   local: {
     onboarding: {
