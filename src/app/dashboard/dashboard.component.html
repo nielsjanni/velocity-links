@@ -608,16 +608,14 @@
         <span>{{ support.jiraD2tc.text }}</span>
       </a>
       <div class="container">
-        <form>
-          <input
-            class="search-field"
-            placeholder="ticket#"
-            (input)="ticketNumber = getValue($event)"
-          />
-          <a href="{{ jiraUrl }}" target="_blank" rel="noopener">
-            <button class="search-button">Search</button>
-          </a>
-        </form>
+        <input
+          class="search-field"
+          placeholder="ticket#"
+          (input)="ticketNumber = getValue($event)"
+        />
+        <a href="{{ jiraUrl }}" target="_blank" rel="noopener">
+          <button class="search-button">{{ jiraUrl }}</button>
+        </a>
       </div>
     </div>
   </div>
